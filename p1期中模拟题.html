@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wai p{
+            background-color: #b2281d;
+            text-align: center;
+            color: aliceblue;
+            height: 30px;
+            padding-top: 10px;
+            margin-bottom: 20px;
+        }
+        .nei{
+            width: 1200px;
+            height: 890px;
+            margin: auto;
+
+        }
+        .dhl ul li{
+            list-style: none;
+            float: left;
+            width: 160px;
+            height: 23px;
+            padding-top: 5px;
+            line-height: 18px;
+            text-align: center;
+        }
+        .dhl ul li:hover{
+            background-color: #b2281d;
+            color: #fff;
+        }
+        .box1{
+            float: left;
+            width: 1200px;
+            height: 50px;
+        }
+        .box1 div{
+            float: right;
+        }
+        .box1 h2{
+            float: left;
+            margin-top: 20px;
+            color: #b2281d;
+
+        }
+        .box1 div input{
+            float: left;
+            width: 200px;
+            height: 30px;
+            border-radius: 30px;
+            text-indent: 15px;
+            border-bottom-right-radius: 0px;
+            border-top-right-radius:0px ;
+            border: 1px solid #b2281d;
+            margin-top: 17px;
+        }
+        .box1 div button{
+            float: left;
+            width: 50px;
+            height: 32px;
+            border-radius: 30px;
+            padding-right: 7px;
+            border-bottom-left-radius: 0px;
+            border-top-left-radius:0px ;
+            background-color: #b2281d;
+            border: 1px solid #b2281d;
+            color: #fff;
+            margin-top: 17px;
+        }
+        .box1 div button:hover{
+            background-color: #bbe8e0;
+            color: #000;
+        }
+        .box2 img{
+            width: 1200px;
+            margin-top: 20px;
+        }
+        .box2 div{
+            display: flex;
+            justify-content: space-between;
+        }
+        .box2 div img{
+            width: 280px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wai">
+        <p>网易云音乐，与你同在</p>
+        <div class="nei">
+            <!-- 推荐栏 -->
+            <div class="dhl">
+                <ul>
+                    <li>推荐</li>
+                    <li>排行</li>
+                    <li>歌单</li>
+                    <li>电台</li>
+                    <li>歌手</li>
+                </ul>
+            </div>
+            <!-- 搜索栏 -->
+            <div class="box1">
+                <h2>网易云音乐</h2>
+                <div><input type="text" name="" id="" placeholder="请输入内容">
+                    <button type="submit">搜索</button></div>
+            </div>
+            <!-- 图片 -->
+            <div class="box2">
+                <img src="./banner.jpg" alt="">
+                <div>
+                    <img src="./img1.jpg" alt="">
+                    <img src="./img2.jpg" alt="">
+                    <img src="./img3.jpg" alt="">
+                    <img src="./img4.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <p>网易云公司版权所有&copy;1997-2023</p>
+    </div>
+</body>
+</html>
