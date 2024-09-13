@@ -1,0 +1,168 @@
+H2310A P10 期末理论题综合
+什么是 XSS 攻击和CSRF，如何避免？
+XSS 攻击：即跨站脚本攻击，它是 Web 程序中常见的漏洞。原理是攻击者往 Web 页面里插入恶意的脚本代码（css 代码、Javascript 代码等），当用户浏览该页面时，嵌入其中的脚本代码会被执行，从而达到恶意攻击用户的目的，如盗取用户 cookie、破坏页面结构、重定向到其他网站等。
+预防 XSS 的核心是必须对输入的数据做过滤处理。
+CSRF：Cross-Site Request Forgery（中文：跨站请求伪造），可以理解为攻击者盗用了你的身份，以你的名义发送恶意请求，比如：以你名义发送邮件、发消息、购买商品，虚拟货币转账等。
+防御手段：
+验证请求来源地址；
+关键操作添加验证码；
+在请求地址添加 token 并验证。
+Servlet、Filter过滤器、Listener监听器
+简单来说servlet是运行在服务器上的java程序，servlet由servlet容器管理，servlet容器也叫 servlet引擎，是servlet的运行环境，给发送的请求和响应之上提供网络服务。
+servlet专门用来接收客户端的请求数据，然后调用底层service处理数据并生成结果，根接口是Servlet接口，提供service方法处理请求，还有一个常用子类叫HttpServlet，针对Http协议做了支持，提供常用的doGet、doPost方法处理请求。
+过滤器
+是对目标资源的请求和响应进行拦截处理的对象。在Java中使用Filter接口实现，通过在web.xml中配置，或者使用WebFilter注解方式配置过滤的请求路径，拦截下来请求后，进行预处理，如：乱码处理、登录认证的， 同时也可以在Servlet执行完毕响应后，也可以进行处理。
+监听器
+是监听对象状态改变 ，执行预设处理措施的对象。在Java中使用Listener接口实现。提供针对域对象的创建、数据修改、session数据绑定与解绑等操作进行监听。当触发这些被监听的事件，可以执行一些预先定义好的操作。
+java中一共给我们提供了八个监听器接口,分别用于监听三个域对象,每个监听器都有专门监听的事件：
+ServletRequestListener (处理request对象创建和销毁) ServleRequestAttributeListener (处理域对象中的数据添加 替换 删除)
+HttpSessionListener (处理session对象创建和销毁)
+HttpSessionAttributeListener 处理session域对象中的数据添加 修改删除)
+HttpSessionBindingListener (处理session对象监听器绑定和解绑定接口)
+HttpSessionActivationListener (处理session对象钝化和活化状态接口)
+ServletContextListener (处理application对象创建和销毁)
+ServletContextAttributeListener (处理application域对象中的数据添加 修改 删除)
+
+@Autowired注解有什么作用
+@Autowired默认是按照类型装配注入的，默认情况下它要求依赖对象必须存在（可以设置它required属性为false)。@Autowired 注解提供了更细粒度的控制，包括在何处以及如何完成自动装配。它的用法和@Required一样，修饰setter方法、构造器、属性或者具有任意名称和/或多个参数的PN方法。
+@Autowired和@Resource之间的区别
+@Autowired可用于: 构造函数、成员变量、Setter方法
+@Autowired和@Resource之间的区别
+相同点:
+1，@Autowired和@Resource功能相同，都可以用来装配bean;
+2，两个注解可以加载属性字段或写在setter方法上;
+不同点:
+1，提供方不同:@Autowired是Spring框架提供，@Resource是Java自带，jdk1.6版本开始支持;
+2，装配方式不同:
+@Autowired默认按照byType装配;
+@Resource默认按照byName装配，如果匹配不到，则继续使用byType装配;
+ 
+@Qualifier注解有什么作用
+当您创建多个相同类型的bean并希望仅使用属性装配其中一个bean时，您可以使用@Qualifier注解和@Autowired通过指定应该装配哪个确切的bean来消除歧义。
+
+
+@RestController和 @Controller区别
+@RestController=@Controller+@ResponseBody
+单独使用@Controller注解，表示声明一个web层的组件，其中使用@RequestMaping注解声明的用于处理请求的方法，返回String表示逻辑视图名，返回ModelAndView表示模型和视图。而使用@RestController标注了以后，所有的处理器方法返回的结果，都会被转为JSON格式字符串返回给客户端。
+Spring通知（Advice）有哪些类型？
+（1）前置通知（Before Advice）：在连接点（Join point）之前执行的通知。
+（2）后置通知（After Advice）：当连接点退出的时候执行的通知（不论是正常返回还是异常退出）。 
+（3）环绕通知（Around Advice）：包围一个连接点的通知，这是最强大的一种通知类型。 环绕通知可以在方法调用前后完成自定义的行为。它也可以选择是否继续执行连接点或直接返回它们自己的返回值或抛出2异常来结束执行。
+（4）返回后通知（AfterReturning Advice）：在连接点正常完成后执行的通知（如果连接点抛出异常，则不执行）。
+（5）抛出异常后通知（AfterThrowing advice）：在方法抛出异常退出时执行的通知。
+
+手写冒泡排序？
+int arr[]={9,8,7,6,5,4}
+for(int i=0;i<arr.length-1;i++){
+   for(int j=0;j<arr.length-1-i;j++){
+   if(arr[j]>arr[j+1]){
+    int temp = arr[j];
+    arr[j] = arr[j+1];
+    arr[j+1] = temp;
+   }
+  }
+ }
+
+Spring如何解决循环依赖问题(重点）
+循环依赖问题在Spring中主要有三种情况：
+（1）通过构造方法进行依赖注入时产生的循环依赖问题。
+（2）通过setter方法进行依赖注入且是在多例（原型）模式下产生的循环依赖问题。
+（3）通过setter方法进行依赖注入且是在单例模式下产生的循环依赖问题。
+在Spring中，只有第（3）种方式的循环依赖问题被解决了，其他两种方式在遇到循环依赖问题时都会产生异常。这是因为：
+第一种构造方法注入的情况下，在new对象的时候就会堵塞住了，其实也就是”先有鸡还是先有蛋“的历史难题。
+第二种setter方法（多例）的情况下，每一次getBean()时，都会产生一个新的Bean，如此反复下去就会有无穷无尽的Bean产生了，最终就会导致OOM问题的出现。
+Spring在单例模式下的setter方法依赖注入引起的循环依赖问题，主要是通过二级缓存和三级缓存来解决的，其中三级缓存是主要功臣。解决的核心原理就是：在对象实例化之后，依赖注入之前，Spring提前暴露的Bean实例的引用在第三级缓存中进行存储。
+@Autowired和@Resource之间的区别：
+(1) @Autowired默认是按照类型装配注入的，默认情况下它要求依赖对象必须存在（可以设置它required属性为false）。
+(2)@Resource默认是按照名称来装配注入的，只有当找不到与名称匹配的bean才会按照类型来装配注入。
+
+Linux常用命令？
+ls 显示指定目录下的所有内容
+cd 用于切换当前工作目录，即进入指定目录
+cat 用于显示文件内容
+tail 查看文件末尾的内容,常用来查看命令
+mkdir 创建目录
+rm 删除空目录
+cp 拷贝文件
+mv 移动文件
+vi 编辑文件
+ps -ef 查看系统进程
+grep/find 查找
+
+
+Spring 框架中都用到了哪些设计模式？重点
+（1）工厂模式：Spring使用工厂模式，通过BeanFactory和ApplicationContext来创建对象；
+（2）单例模式：Bean默认为单例模式；
+（3）策略模式：例如Resource的实现类，针对不同的资源文件，实现了不同方式的资源获取策略；
+（4）代理模式：Spring的AOP功能用到了JDK的动态代理和CGLIB字节码生成技术；
+（5）模板方法：可以将相同部分的代码放在父类中，而将不同的代码放入不同的子类中，用来解决代码重复的问题。比如RestTemplate, JmsTemplate, JpaTemplate；
+（6）适配器模式：Spring AOP的增强或通知（Advice）使用到了适配器模式，Spring MVC中也是用到了适配器模式适配Controller；
+（7）观察者模式：Spring事件驱动模型就是观察者模式的一个经典应用；
+（8）桥接模式：可以根据客户的需求能够动态切换不同的数据源。比如我们的项目需要连接多个数据库，客户在每次访问中根据需要会去访问不同的数据库。
+
+SpringMVC如何实现全局异常处理
+使用 @ControllerAdvice 注解(可以用于前后端分离项目，经常使用的)
+作用域：全局，针对全部 Controller 中的指定异常类；
+该注解需要 和 @ExceptionHandler 配合，来完成全局异常的处理；
+单独定义一个类，使用@ControllerAdvice注解修饰，在注解内部使用@ExceptionHandler注解修饰处理异常的方法。
+ExceptionHandler 注解修饰用于处理异常的方法，在该方法中传入异常类型参数，自动实现异常捕获，当Controller层抛出一个异常，自动抛给对应异常处理的方法中去处理。
+ @ExceptionHandler(ArithmeticException.class)
+public Map showInfo(Exception e){
+ System.out.println(" 算数异常 ");
+ System.out.println(e.getMessage());
+}
+
+Docker镜像常用命令
+docker search IMAGE 检索镜像
+docker pull IMAGE[:TAG] 拉取镜像
+docker images   列出本地主机上的镜像
+docker rmi 删除镜像。
+docker commit 提交镜像
+
+
+Mybatis是如何进行分页的？分页插件的原理是什么？
+Mybatis使用RowBounds对象进行分页，它是针对ResultSet结果集执行的内存分页，而非物理分页，它是查询出来所有数据，放到客户端内存中，进行分页，如果数据量特别大，那么这个操作这是非常要命的，因为会消耗大量内存、网络IO，实际中我们不会使用的，我们更喜欢物理分页。
+物理分页就是：在sql内直接书写带有物理分页的Limit语句来完成物理分页功能，也可以使用分页插件来完成物理分页。
+分页插件的基本原理是使用Mybatis提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的sql，然后重写sql，其实就是在查询语句末尾自动拼接上Limit语句，其实本质还是物理分页。
+相比于使用分页插件，我更喜欢自己在SQL中编写LIMIT语句更简洁一些。
+
+Lombok常用注解说一下，以及含义？
+lombok常用注解：
+lombok所作的简化操作，原理就是在java源码编译为.class字节码过程中接入，自动根据标注的注解添加相应的代码。
+@Setter @Getter：标注在属性上，自动为该属性生成getter和setter方法；
+@ToString：标注在类上，生成toString()方法，该注解有以下多个属性可以进一步设置：
+ includeFieldNames：是否包含字段名称，默认为true；
+ exclude：排除生成tostring的字段；
+@EqualsAndHashCode：标注在类上，自动生成hashCode和equals方法；
+@Data ：标注在类上，生成get、set、toString、equals、hashCode方法：
+	相当于@Setter + Getter + @ToString + @EqualsAndHashCode；
+@NoArgsConstructor：标注在类上，自动生成无参构造器；
+@AllArgsConstructor：标注在类上，自动生成全参构造器；
+@Slf4j:标注在类上，可以直接在类中使用log.debug()等方法进行日志输出；
+什么是shiro，说一下你的理解
+Shiro是一个功能丰富且易于使用的Java安全框架，提供了身份验证、授权、加密、会话管理等安全功能
+1. 身份验证：Shiro支持多种身份验证方式，包括基于表单、基于OpenID、基于LDAP等，在数据库管理系统、Web应用程序和字符串等方面都具有广泛的应用。
+2. 授权：为应用程序提供灵活的授权机制，可以基于角色或权限进行授权，并支持细粒度的授权策略。
+3. 密码加密：Shiro支持多种密码加密技术，包括MD5、SHA、DES、AES等。
+4. 会话管理：提供全面的会话管理功能，包括会话定时器、会话持久化、会话ID生成等，使用户可以实现更可靠的会话管理。
+总之，Shiro是一个功能强大的Java安全框架
+
+
+SpringBoot的自动配置原理/运行机制? 背
+SpringBoot启动会加载大量的自动配置类;
+加载原理:启动类上面@SpringBootApplication是一个组合注解，包括@EnableAutoConﬁguration和@ComponentScan。
+@EnableAutoConﬁguration是开启自动化配置的注解，里面指定了要加载的配置类，最终会加载spring-boot-autoconﬁgure.jar包中META-NF/下面spring.factories配置文件中的所有自动配置类，这些配置类包含了经常使用的各种场景，jpa， redis，mq等等，装载配置类的时候，有默认配置，如果项目的配置文件中指定了配置参数，就用配置文件中的，如果没有指定就用默认的。
+SpringBoot启动后，默认会加载启动类的同级包和子级包下面的类。
+SpringBoot集成常用的框架，只需要依赖XX-starter的依赖，starter的pom就是一个依赖集合，里面包含了用到的所有的依赖包包含各个依赖的版本号。
+SpringBoot的核心注解是哪个？它是由几个注解组成的？背
+启动类上面的注解是@SpringBootApplication，它也是Spring Boot 的核心注解，主要组合包含了以下3个注解:
+@SpringBootConfiguration:组合了@Configuration注解，实现配置文件的功能。
+@EnableAutoConfiguration:打开自动配置的功能，也可以关闭某个自动配置的选项，如关闭数据源自动配置功能: @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })。@ComponentScan: Spring组件扫描。
+ 
+
+Mybatis和MybatisPlus区别
+MybatisPlus是一个 的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。
+MybatisPlus对Mybatis只做增强，不做改变。启动时，自动注入基本的增删改查功能，简化程序员对基本增删改查代码的编写。
+提供BaseMapper、通用Service接口，在其中封装了常用的增删改查功能，使用时只需要简单的配置，即可完成大部分简单的增删改查功能。
+MybatisPlus同时提供了分页插件、逻辑删除插件、乐观锁插件、内置性能分析工具，帮助我们更加方便的完成持久化层的代码开发。
+它的原理就是在mybatis启动时，根据预先配置的信息，生成通用的增删改查功能，注入到SqlSessionFactory中，使用的时候直接调用。
